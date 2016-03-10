@@ -6,7 +6,8 @@
  * Time: 12:54
  */
 
-function gerar_url($string) {
+function gerar_url($string)
+{
     $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿ??"!@#$%&*()_-+={[}]/?;:.,\\\'<>°ºª';
     $b = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                 ';
     $string = strtr($string, $a, $b);
@@ -19,10 +20,11 @@ function gerar_url($string) {
 }
 
 //Carregar um ou vários arquivos .CSS de uma pasta
-function load_css($arquivo = NULL, $pasta = "css", $media = "all") {
+function load_css($arquivo = NULL, $pasta = "css", $media = "all")
+{
 
     if ($arquivo != NULL) {
-        $CI = & get_instance();
+        $CI = &get_instance();
         $CI->load->helper("url");
         $retorno = "";
 
@@ -38,9 +40,10 @@ function load_css($arquivo = NULL, $pasta = "css", $media = "all") {
 }
 
 //Carregar um ou vários arquivos .JS de uma pasta ou servidor remoto
-function load_js($arquivo = NULL, $pasta = "js", $remoto = FALSE) {
+function load_js($arquivo = NULL, $pasta = "js", $remoto = FALSE)
+{
     if ($arquivo != NULL) {
-        $CI = & get_instance();
+        $CI = &get_instance();
         $CI->load->helper("url");
         $retorno = "";
 
@@ -63,7 +66,8 @@ function load_js($arquivo = NULL, $pasta = "js", $remoto = FALSE) {
     return $retorno;
 }
 
-function resumirNoticia($string, $words = '100') {
+function resumirNoticia($string, $words = '100')
+{
     $string = strip_tags($string);
     $count = strlen($string);
 
@@ -75,23 +79,26 @@ function resumirNoticia($string, $words = '100') {
     }
 }
 
-function init_front($view = NULL, $vars = NULL) {
-    $ci = & get_instance();
+function init_front($view = NULL, $vars = NULL)
+{
+    $ci = &get_instance();
     $ci->load->view("front/header");
     $ci->load->view($view, $vars);
     $ci->load->view("front/footer");
 }
 
-function init_back($view = NULL, $vars = NULL) {
+function init_back($view = NULL, $vars = NULL)
+{
     verificarSeEstaLogado();
-    $ci = & get_instance();
+    $ci = &get_instance();
     $ci->load->view("back/header");
     $ci->load->view($view, $vars);
     $ci->load->view("back/footer");
 }
 
-function verificarSeEstaLogado() {
-    $ci = & get_instance();
+function verificarSeEstaLogado()
+{
+    $ci = &get_instance();
     if (!$ci->session->userdata("userLogin")) {
         session_destroy();
         set_mensagem("msgerro", "Você precisa estar logado para prosseguir", "erro");
@@ -102,27 +109,29 @@ function verificarSeEstaLogado() {
 }
 
 //Define uma mensagem para ser exibida na próxima tela carregada
-function set_mensagem($id = "msgerro", $msg = NULL, $tipo = "erro") {
-    $ci = & get_instance();
+function set_mensagem($id = "msgerro", $msg = NULL, $tipo = "erro")
+{
+    $ci = &get_instance();
     switch ($tipo):
         case "erro":
-            $ci->session->set_flashdata($id, '<div class="alert callout"><p>' . $msg . '</p></div>');
+            $ci->session->set_flashdata($id, '<div class="alert alert-danger"><p>' . $msg . '</p></div>');
             break;
         case "warning":
-            $ci->session->set_flashdata($id, '<div class="warning callout"><p>' . $msg . '</p></div>');
+            $ci->session->set_flashdata($id, '<div class="alert alert-warning"><p>' . $msg . '</p></div>');
             break;
         case "sucesso":
-            $ci->session->set_flashdata($id, '<div class="success callout"><p>' . $msg . '</p></div>');
+            $ci->session->set_flashdata($id, '<div class="alert alert-success"><p>' . $msg . '</p></div>');
             break;
         default:
-            $ci->session->set_flashdata($id, '<div class="callout"><p>' . $msg . '</p></div>');
+            $ci->session->set_flashdata($id, '<div class="alert alert-info"><p>' . $msg . '</p></div>');
             break;
     endswitch;
 }
 
 //Verifica se existe uma mensagem para ser exibida na tela atual
-function get_mensagem($id, $printar = TRUE) {
-    $ci = & get_instance();
+function get_mensagem($id, $printar = TRUE)
+{
+    $ci = &get_instance();
     if ($ci->session->flashdata($id)) {
         if ($printar) {
             echo $ci->session->flashdata($id);
@@ -132,4 +141,27 @@ function get_mensagem($id, $printar = TRUE) {
         }
     }
     return FALSE;
+}
+
+function enviar_email($assunto, $msg, $destino, $nomeDestino, $de)
+{
+    $ci = get_instance();
+    $ci->load->library("My_PHPMailer");
+    $mail = new PHPMailer();
+    $mail->IsSMTP(); //habilita  smtp
+    $mail->SMTPAuth = TRUE; //ativa email autenticado
+    $mail->Host = 'smtp.profpaulinho.com.br'; //servidor de envio
+    $mail->Port = '587'; //porta de envio
+    $mail->CharSet = "UTF-8"; //charset html
+    $mail->Username = 'profpaulinho@profpaulinho.com.br'; //email de envio
+    $mail->Password = '123456asd'; //senha
+
+    $mail->From = 'profpaulinho@profpaulinho.com.br'; //remetente
+    $mail->FromName = $de; //nome remetente
+
+    $mail->IsHTML(true);
+    $mail->Subject = $assunto; //assunto
+    $mail->Body = $msg; //mensagem
+    $mail->AddAddress($destino, $nomeDestino); //email e nome do destino
+    $mail->Send(); //enviar Email
 }

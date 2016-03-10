@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Portal do Professor Paulinho</title>
-    <?= load_css(array("bootstrap.min", "app", "owl.carousel", "responsiveslides", "owl.theme", "demo"), "/assets/css") ?>
+    <?= load_css(array("bootstrap.min", "app", "owl.carousel", "responsiveslides", "owl.theme", "demo", "lightbox"), "/assets/css") ?>
     <style>
         #owl-carousel .item img {
             display: block;
@@ -35,49 +35,29 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
+    <?php
+    get_mensagem("msgerro");
+    get_mensagem("msgsucesso");
+    ?>
+    <div class="col-md-12">
         <!--Logo-->
-        <div id="logo">
-            <div class="col-md-2">
-                <a href="<?= base_url("/") ?>">
-                    <img id="logo" src="<?= base_url('/assets/img/logoP.png') ?>" class="img-rounded" alt="Professor Paulinho">
-                </a>
-            </div>
-        </div>
-        <!--Redes sociais-->
-        <div class="col-md-6 ">
-            <ul id="menuRede">
-                <li>
-                    <a href="">
-                        <img width="48px" height="48px" id="redesSociais" src="<?= base_url('/assets/img/face.png') ?>" class="img-responsive" alt="Responsive image">
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img width="48px" height="48px" id="redesSociais" src="<?= base_url('/assets/img/google.png') ?>" class="img-responsive" alt="Responsive image">
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img width="48px" height="48px" id="redesSociais" src="<?= base_url('/assets/img/insta.png') ?>" class="img-responsive" alt="Responsive image">
-                    </a>
-                </li>
-            </ul>
+        <div class="col-md-4">
+            <a href="<?= base_url("/") ?>">
+                <img style="width: 125%" src="<?= base_url('/assets/img/logoP.png') ?>" class="img-rounded"
+                     alt="Professor Paulinho">
+            </a>
         </div>
     </div>
-    <!--Menu-->
-    <div class="row">
-        <div class="col-md-9 col-md-offset-4">
-            <div id="menuPag">
-                <ul class="nav nav-pills">
-                    <li><a href="<?= base_url("/") ?>">HOME</a></li>
-                    <li><a href="#">BIOGRAFIA</a></li>
-                    <li><a href="<?= base_url("/index/noticia") ?>">NOTICIAS</a></li>
-                    <li><a href="#">IMPRENSA</a></li>
-                    <li><a href="#">CONTATO</a></li>
-                    <li><a href="<?=base_url("/usuario")?>">PAINEL</a></li>
-                </ul>
-            </div>
-        </div>
+    <div class="col-md-9 col-md-offset-2">
+        <!--Menu-->
+        <ul class="nav nav-pills">
+            <li><a href="<?= base_url("/") ?>">HOME</a></li>
+            <li><a href="<?= base_url("/index/biografia") ?>">BIOGRAFIA</a></li>
+            <li><a href="<?= base_url("/index/noticia") ?>">NOTICIAS</a></li>
+            <li><a href="<?= base_url("/index/imprensa") ?>">IMPRENSA</a></li>
+            <li><a href="<?= base_url("/index/contato") ?>">CONTATO</a></li>
+            <li><a href="<?= base_url("/index/galeria") ?>">GALERIA</a></li>
+        </ul>
     </div>
+</div>
 </div>

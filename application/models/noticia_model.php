@@ -14,38 +14,38 @@ class Noticia_model extends CI_Model
         if ($dados != NULL) {
             $this->db->insert("noticia_$bancoNoticia", $dados);
             if ($this->db->affected_rows() > 0) {
-                set_mensagem("msgsucesso", "Projeto adicionado com sucesso", "sucesso");
+                set_mensagem("msgsucesso", "Notícia adicionada com sucesso", "sucesso");
                 redirect("noticia/listarNoticia$redirect");
             } else {
-                set_mensagem("msgerro", "Não foi possível adicionar o projeto", "erro");
+                set_mensagem("msgerro", "Não foi possível adicionar a notícia", "erro");
                 redirect("noticia/listarNoticia$redirect");
             }
         }
     }
 
-    public function editarNoticia($dados = NULL, $condicao = NULL, $bancoNoticia = NULL, $redirect = NULL)
+    public function desativarNoticia($dados = NULL, $condicao = NULL, $bancoNoticia = NULL, $redirect = NULL)
     {
         if ($dados != NULL && is_array($condicao)) {
             $this->db->update("noticia_$bancoNoticia", $dados, $condicao);
             if ($this->db->affected_rows() > 0) {
-                set_mensagem("msgsucesso", "Projeto editado com sucesso", "sucesso");
+                set_mensagem("msgsucesso", "Noticia desativada com sucesso", "sucesso");
                 redirect("noticia/listarNoticia$redirect");
             } else {
-                set_mensagem("msgerro", "Não foi possível editar o projeto", "erro");
+                set_mensagem("msgerro", "Não foi possível desativar a noticia", "erro");
                 redirect("noticia/listarNoticia$redirect");
             }
         }
     }
 
-    public function excluirNoticia($condiçao = NULL, $bancoNoticia = NULL, $redirect = NULL)
+    public function excluirNoticia($condicao = NULL, $bancoNoticia = NULL, $redirect = NULL)
     {
-        if (is_array($condiçao)) {
-            $this->db->delete("noticia_$bancoNoticia", $condiçao);
+        if (is_array($condicao)) {
+            $this->db->delete("noticia_$bancoNoticia", $condicao);
             if ($this->db->affected_rows() > 0) {
-                set_mensagem("msgerro", "Projeto excluído com sucesso", "erro");
+                set_mensagem("msgerro", "Notícia excluída com sucesso", "erro");
                 redirect("noticia/listarNoticia$redirect");
             } else {
-                set_mensagem("msgerro", "Não foi possível excluir o projeto", "erro");
+                set_mensagem("msgerro", "Não foi possível excluir a noticia", "erro");
                 redirect(current_url());
             }
         }
@@ -55,6 +55,7 @@ class Noticia_model extends CI_Model
     {
         $config["upload_path"] = "./uploads/";
         $config["allowed_types"] = "gif|jpg|png";
+        $config["encrypt_name"] = TRUE;
         $this->load->library("upload", $config);
         if ($this->upload->do_upload($campo)) {
             return $this->upload->data();
@@ -63,9 +64,16 @@ class Noticia_model extends CI_Model
         }
     }
 
+    public function GetNoticiaFront($bancoNoticia = NULL)
+    {
+        $this->db->where("status", 1);
+        $this->db->order_by("data", "desc");
+        $query = $this->db->get("noticia_$bancoNoticia");
+        return $query->result();
+    }
+
     public function GetNoticia($bancoNoticia = NULL)
     {
-        $this->db->limit(5);
         $this->db->order_by("data", "desc");
         $query = $this->db->get("noticia_$bancoNoticia");
         return $query->result();
@@ -74,6 +82,7 @@ class Noticia_model extends CI_Model
     public function GetNoticiaSingle($bancoNoticia = NULL)
     {
         $this->db->limit(1);
+        $this->db->where("status", 1);
         $this->db->order_by("data", "desc");
         $query = $this->db->get("noticia_$bancoNoticia");
         return $query->row();

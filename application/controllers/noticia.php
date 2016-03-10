@@ -55,7 +55,7 @@ class Noticia extends CI_Controller
                     "descricao" => $this->input->post("descricao"),
                     "data" => date("Y-m-d H:i:s"),
                     "url" => gerar_url($this->input->post("titulo")),
-                    "status" => 1
+                    "status" => 0
                 );
                 $this->noticia->inserirNoticia($dados, "secundaria", "Secundaria");
             } else {
@@ -79,7 +79,7 @@ class Noticia extends CI_Controller
                     "descricao" => $this->input->post("descricao"),
                     "data" => date("Y-m-d H:i:s"),
                     "url" => gerar_url($this->input->post("titulo")),
-                    "status" => 1
+                    "status" => 0
                 );
                 $this->noticia->inserirNoticia($dados, "terciaria", "Terciaria");
             } else {
@@ -103,7 +103,7 @@ class Noticia extends CI_Controller
                     "descricao" => $this->input->post("descricao"),
                     "data" => date("Y-m-d H:i:s"),
                     "url" => gerar_url($this->input->post("titulo")),
-                    "status" => 1
+                    "status" => 0
                 );
                 $this->noticia->inserirNoticia($dados, "quaternaria", "Quaternaria");
             } else {
@@ -127,7 +127,7 @@ class Noticia extends CI_Controller
                     "descricao" => $this->input->post("descricao"),
                     "data" => date("Y-m-d H:i:s"),
                     "url" => gerar_url($this->input->post("titulo")),
-                    "status" => 1
+                    "status" => 0
                 );
                 $this->noticia->inserirNoticia($dados, "quinaria", "Quinaria");
             } else {
@@ -191,49 +191,130 @@ class Noticia extends CI_Controller
         init_back("back/listar-noticia-senaria");
     }
 
-    public function editarNoticia()
+    public function ativarNoticiaPrincipal()
     {
-        $this->form_validation->set_rules("titulo", "Título", "trim|required");
-        $this->form_validation->set_rules("conexao", "Nome do(s) Conexão Jovem", "trim|required");
-        $this->form_validation->set_rules("descricao", "Descrição", "trim|required");
-        $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
-        if ($this->form_validation->run() == TRUE) {
-            $upload = $this->noticia->UploadNoticia("imagem");
-            if (is_array($upload) && $upload["file_name"] != "") {
-                $dados = array(
-                    "imagem" => $upload["file_name"],
-                    "titulo" => $this->input->post("titulo"),
-                    "video" => $this->input->post("video"),
-                    "descricao" => $this->input->post("descricao"),
-                    "data" => date("Y-m-d H:i:s"),
-                    "url" => gerar_url($this->input->post("titulo")),
-                    "nome_conexao" => $this->input->post("conexao"),
-                    "status" => $this->input->post("status")
-                );
-                $this->noticia->editarNoticia($dados, array("id" => $this->input->post("id")));
-                redirect(base_url("noticia/listarNoticia"));
-            } elseif (!isset($upload)) {
-                $remover = array("/watch?", "=");
-                $dados = array(
-                    "video" => str_replace($remover, "/", $this->input->post("video")),
-                    "titulo" => $this->input->post("titulo"),
-                    "descricao" => $this->input->post("descricao"),
-                    "data" => date("Y-m-d H:i:s"),
-                    "url" => gerar_url($this->input->post("titulo")),
-                    "nome_conexao" => $this->input->post("conexao"),
-                    "status" => $this->input->post("status")
-                );
-                $this->noticia->inserirNoticia($dados);
-            } else {
-                var_dump($upload);
-            }
-        }
-        init_back("back/editar-noticia");
+        $dados = array(
+            "status" => 1
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "principal", "Principal");
     }
 
-    public function excluirNoticia()
+    public function ativarNoticiaSecundaria()
     {
-        $this->noticia->excluirNoticia(array("id" => $this->input->get("id")));
+        $dados = array(
+            "status" => 1
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "secundaria", "Secundaria");
+    }
+
+    public function ativarNoticiaTerciaria()
+    {
+        $dados = array(
+            "status" => 1
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "terciaria", "Terciaria");
+    }
+
+    public function ativarNoticiaQuaternaria()
+    {
+        $dados = array(
+            "status" => 1
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "quaternaria", "Quaternaria");
+    }
+
+    public function ativarNoticiaQuinaria()
+    {
+        $dados = array(
+            "status" => 1
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "quinaria", "Quinaria");
+    }
+
+    public function ativarNoticiaSenaria()
+    {
+        $dados = array(
+            "status" => 1
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "senaria", "Senaria");
+    }
+
+    public function desativarNoticiaPrincipal()
+    {
+        $dados = array(
+            "status" => 0
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "principal", "Principal");
+    }
+
+    public function desativarNoticiaSecundaria()
+    {
+        $dados = array(
+            "status" => 0
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "secundaria", "Secundaria");
+    }
+
+    public function desativarNoticiaTerciaria()
+    {
+        $dados = array(
+            "status" => 0
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "terciaria", "Terciaria");
+    }
+
+    public function desativarNoticiaQuaternaria()
+    {
+        $dados = array(
+            "status" => 0
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "quaternaria", "Quaternaria");
+    }
+
+    public function desativarNoticiaQuinaria()
+    {
+        $dados = array(
+            "status" => 0
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "quinaria", "Quinaria");
+    }
+
+    public function desativarNoticiaSenaria()
+    {
+        $dados = array(
+            "status" => 0
+        );
+        $this->noticia->desativarNoticia($dados, array("id" => $this->input->get("id")), "senaria", "Senaria");
+    }
+
+    public function excluirNoticiaPrincipal()
+    {
+        $this->noticia->excluirNoticia(array("id" => $this->input->get("id")), "principal", "Principal");
+    }
+
+    public function excluirNoticiaSecundaria()
+    {
+        $this->noticia->excluirNoticia(array("id" => $this->input->get("id")), "secundaria", "Secundaria");
+    }
+
+    public function excluirNoticiaTerciaria()
+    {
+        $this->noticia->excluirNoticia(array("id" => $this->input->get("id")), "terciaria", "Terciaria");
+    }
+
+    public function excluirNoticiaQuaternaria()
+    {
+        $this->noticia->excluirNoticia(array("id" => $this->input->get("id")), "quaternaria", "Quaternaria");
+    }
+
+    public function excluirNoticiaQuinaria()
+    {
+        $this->noticia->excluirNoticia(array("id" => $this->input->get("id")), "quinaria", "Quinaria");
+    }
+
+    public function excluirNoticiaSenaria()
+    {
+        $this->noticia->excluirNoticia(array("id" => $this->input->get("id")), "senaria", "Senaria");
     }
 
     public function buscarNoticia()

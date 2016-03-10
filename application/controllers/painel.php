@@ -14,7 +14,7 @@ class Painel extends CI_Controller
         parent::__construct();
         date_default_timezone_set('America/Sao_Paulo');
         $this->load->library("session");
-        $this->load->model("usuario_model", "usuario");
+        $this->load->model("painel_model", "painel");
         if (!$this->session->userdata("userLogin")) {
             redirect("/");
         }
@@ -28,6 +28,20 @@ class Painel extends CI_Controller
     public function painel()
     {
         init_back("back/painel");
+    }
+
+    public function editarBiografia()
+    {
+        $this->form_validation->set_rules("texto", "Texto", "trim|required");
+        $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
+        if ($this->form_validation->run() == TRUE) {
+            $dados = array(
+                "texto" => $this->input->post("texto"),
+                "data" => date("Y-m-d H:i:s")
+            );
+            $this->painel->biografia($dados);
+        }
+        init_back("back/biografia");
     }
 
 }

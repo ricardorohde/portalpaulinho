@@ -1,3 +1,4 @@
+<hr/>
 <?php
 $query = $this->noticia->GetNoticiaById($this->input->get("id"), "quinaria")->row();
 ?>
@@ -10,9 +11,10 @@ $query = $this->noticia->GetNoticiaById($this->input->get("id"), "quinaria")->ro
             <img title="<?= $query->titulo ?>" alt="<?= $query->titulo ?>" class="thumbnail fotoBonita tituloNoticia"
                  src="<?= base_url("uploads/$query->imagem") ?>">
             <div class="descricaoNoticia"><?= $query->descricao ?></div>
+            <br/>
             <a target="_blank"
-               href="http://www.facebook.com/sharer.php?u=<?= urlencode('http://localhost/dengue/noticia/visualizarNoticia/?id=' . $query->id) ?>"><i
-                    class="fi-social-facebook"></i> Compartilhar</a>
+               href="http://www.facebook.com/sharer.php?u=<?=urlencode(base_url('/noticia/visualizarNoticiaQuinaria/?id=' . $query->id))?>">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Compartilhar no Facebook</a>
         </div>
 
     </div>

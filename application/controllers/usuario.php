@@ -12,14 +12,18 @@ class Usuario extends CI_Controller {
 
     public function index()
     {
-        $this->login();
+        if ($this->session->userdata("userName") == "") {
+            $this->login();
+        } else {
+            redirect("/painel");
+        }
     }
 
 	public function login()
 	{
         $this->form_validation->set_rules("email", "Email", "trim|required");
         $this->form_validation->set_rules("senha", "Senha", "required");
-        $this->form_validation->set_error_delimiters('<p class="callout alert">', '</p>');
+        $this->form_validation->set_error_delimiters('<p class="alert alert-warning">', '</p>');
         if ($this->form_validation->run() == TRUE) {
             $email = $this->input->post("email");
             $senha = md5($this->input->post("senha"));

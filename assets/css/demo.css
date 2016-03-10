@@ -6,14 +6,6 @@
     margin: 0 auto 40px;
 }
 
-#slider2,
-#slider3 {
-    box-shadow: none;
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    margin: 0 auto;
-}
-
 .rslides_tabs {
     list-style: none;
     padding: 0;
@@ -55,26 +47,6 @@
     font-weight: bold;
 }
 
-.callbacks1_s1 a {
-    color: #fff;
-    text-decoration: none;
-}
-
-#download {
-    background: #333;
-    background: rgba(255, 255, 255, .1);
-    border: 1px solid rgba(255, 255, 255, .1);
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    display: block;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 60px auto;
-    max-width: 500px;
-    padding: 20px;
-}
-
 #download:hover {
     background: rgba(255, 255, 255, .15);
 }
@@ -85,22 +57,15 @@
 
 /* Callback example */
 
-h3 {
-    font: 20px/30px "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-align: center;
-    color: #fff;
-}
-
 .events {
     list-style: none;
 }
 
 .callbacks_container {
-    margin-left: 350px;
+    margin-bottom: 50px;
     position: relative;
     float: left;
-    width: 50%;
-
+    width: 100%;
 }
 
 .callbacks {
@@ -157,8 +122,8 @@ h3 {
     text-decoration: none;
     height: 61px;
     width: 38px;
-    background: transparent url("/themes/themes.gif") no-repeat left top;
-    margin-top: -75px;
+    background: transparent url("../img/themes.gif") no-repeat left top;
+    margin-top: -45px;
 }
 
 .callbacks_nav:active {
@@ -169,6 +134,23 @@ h3 {
     left: auto;
     background-position: right top;
     right: 0;
+}
+
+#slider3-pager a {
+    display: inline-block;
+}
+
+#slider3-pager img {
+    float: left;
+}
+
+#slider3-pager .rslides_here a {
+    background: transparent;
+    box-shadow: 0 0 0 2px #666;
+}
+
+#slider3-pager a {
+    padding: 0;
 }
 
 @media screen and (max-width: 600px) {
