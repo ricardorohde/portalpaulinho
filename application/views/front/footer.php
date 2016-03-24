@@ -1,4 +1,4 @@
-<div class="col-md-12" style="text-align: center; background-color: #4D7A36; padding-top: 15px; bottom: 0px; position: absolute">
+<div class="col-md-12 text-center" style="background-color: #4D7A36; padding-top: 15px; bottom: 0px; position: absolute">
     <p>
         <span style="color: #EEEEEE">Todos os direitos reservedados a www.professorpaulinho.com</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="<?= base_url("/") ?>">
