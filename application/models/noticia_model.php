@@ -102,6 +102,12 @@ class Noticia_model extends CI_Model
         return $this->db->get("noticia_$bancoNoticia");
     }
 
+    public function GetNoticiaByUrl($url = NULL, $bancoNoticia = NULL)
+    {
+        $this->db->where("url", $url);
+        return $this->db->get("noticia_$bancoNoticia");
+    }
+
     public function ContarRegistros()
     {
         $this->db->where("status", 1);

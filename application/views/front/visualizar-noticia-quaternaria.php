@@ -1,6 +1,6 @@
 <hr/>
 <?php
-$query = $this->noticia->GetNoticiaById($this->input->get("id"), "quaternaria")->row();
+$query = $this->noticia->GetNoticiaByUrl($this->input->get("url"), "quaternaria")->row();
 ?>
 <div class="container">
     <div class="row">
@@ -13,7 +13,7 @@ $query = $this->noticia->GetNoticiaById($this->input->get("id"), "quaternaria")-
             <div class="descricaoNoticia"><?= $query->descricao ?></div>
             <br/>
             <a target="_blank"
-               href="http://www.facebook.com/sharer.php?u=<?=urlencode(base_url('/noticia/visualizarNoticiaQuaternaria/?id=' . $query->id))?>">
+               href="http://www.facebook.com/sharer.php?u=<?=urlencode(base_url('/noticia/visualizarNoticiaQuaternaria/?url=' . $query->url))?>">
                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Compartilhar no Facebook</a>
         </div>
 

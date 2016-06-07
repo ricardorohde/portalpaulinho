@@ -16,7 +16,7 @@
                     <ul>
                         <li>
                             <a class="tituloNoticia"
-                               href="<?= base_url("noticia/visualizarNoticiaPrincipal/?id=$noticia->id") ?>"><?= $noticia->titulo ?></a>
+                               href="<?= base_url("noticia/visualizarNoticiaPrincipal/?url=$noticia->url") ?>"><?= $noticia->titulo ?></a>
                         </li>
 
                         <li>

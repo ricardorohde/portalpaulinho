@@ -52,11 +52,11 @@
         <!--Menu-->
         <ul class="nav nav-pills">
             <li><a href="<?= base_url("/") ?>">HOME</a></li>
-            <li><a href="<?= base_url("/index/biografia") ?>">BIOGRAFIA</a></li>
-            <li><a href="<?= base_url("/index/noticia") ?>">NOTICIAS</a></li>
-            <li><a href="<?= base_url("/index/imprensa") ?>">IMPRENSA</a></li>
-            <li><a href="<?= base_url("/index/contato") ?>">CONTATO</a></li>
-            <li><a href="<?= base_url("/index/galeria") ?>">GALERIA</a></li>
+            <li><a href="<?= base_url("home/biografia") ?>">BIOGRAFIA</a></li>
+            <li><a href="<?= base_url("home/noticia") ?>">NOTICIAS</a></li>
+            <li><a href="<?= base_url("home/imprensa") ?>">IMPRENSA</a></li>
+            <li><a href="<?= base_url("home/contato") ?>">CONTATO</a></li>
+            <li><a href="<?= base_url("home/galeria") ?>">GALERIA</a></li>
         </ul>
     </div>
 </div>

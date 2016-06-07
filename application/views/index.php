@@ -15,32 +15,34 @@
 <div id="owl-carousel" class="owl-carousel owl-theme">
     <?php foreach ($noticiaPrincipal as $principal) { ?>
         <div class="item">
-            <img class="img-responsive center-block" title="<?= $principal->titulo ?>"
-                 src="<?= base_url("/uploads/$principal->imagem") ?>"
-                 alt="<?= $principal->titulo ?>">
+            <a href="<?= base_url("noticia/visualizarNoticiaPrincipal/?url=$principal->url"); ?>">
+                <img class="img-responsive center-block" title="<?= $principal->titulo ?>"
+                     src="<?= base_url("/uploads/$principal->imagem") ?>"
+                     alt="<?= $principal->titulo ?>">
+            </a>
         </div>
     <?php } ?>
 </div>
 <div style="padding-top: 50px;" class="container"><!--Imagens da esquerda-->
     <div class="maisNoticias">
-        <a href="<?= base_url("index/galeria") ?>">Visite a galeria</a>
+        <a href="<?= base_url("home/galeria") ?>">Visite a galeria</a>
     </div>
     <div class="row">
         <div class="col-md-7"><!--Container das imagens-->
             <div class="col-md-4"><!--Primeira imagem-->
-                <a href="<?= base_url("noticia/visualizarNoticiaSecundaria/?id=$noticiaSecundaria->id") ?>">
+                <a href="<?= base_url("noticia/visualizarNoticiaSecundaria/?url=$noticiaSecundaria->url") ?>">
                     <img class="img-circle imgE img-responsive" src="<?= base_url("/uploads/$noticiaSecundaria->imagem") ?>" alt="">
                 </a>
                 <div id="orgTexto"><a class="cor"
-                                      href="<?= base_url("noticia/visualizarNoticiaSecundaria/?id=$noticiaSecundaria->id") ?>"><?= $noticiaSecundaria->titulo ?></a>
+                                      href="<?= base_url("noticia/visualizarNoticiaSecundaria/?url=$noticiaSecundaria->url") ?>"><?= $noticiaSecundaria->titulo ?></a>
                 </div>
             </div>
             <div class="col-md-4">
-                <a href="<?= base_url("noticia/visualizarNoticiaTerciaria/?id=$noticiaTerciaria->id") ?>">
+                <a href="<?= base_url("noticia/visualizarNoticiaTerciaria/?url=$noticiaTerciaria->url") ?>">
                     <img class="img-circle imgE img-responsive" src="<?= base_url("/uploads/$noticiaTerciaria->imagem") ?>" alt="...">
                 </a>
                 <div id="orgTexto"><a class="cor"
-                                      href="<?= base_url("noticia/visualizarNoticiaTerciaria/?id=$noticiaTerciaria->id") ?>"><?= $noticiaTerciaria->titulo ?></a>
+                                      href="<?= base_url("noticia/visualizarNoticiaTerciaria/?url=$noticiaTerciaria->url") ?>"><?= $noticiaTerciaria->titulo ?></a>
                 </div>
             </div>
         </div>
@@ -48,14 +50,14 @@
             <ul class="media-list">
                 <li class="media">
                     <div class="media-left">
-                        <a href="<?= base_url("noticia/visualizarNoticiaQuaternaria/?id=$noticiaQuaternaria->id") ?>">
+                        <a href="<?= base_url("noticia/visualizarNoticiaQuaternaria/?url=$noticiaQuaternaria->url") ?>">
                             <img class="img-circle imgD img-responsive hidden-xs" src="<?= base_url("/uploads/$noticiaQuaternaria->imagem") ?>"
                                  alt="">
                         </a>
                     </div>
                     <div class="media-body">
                         <div class="well well-lg">
-                            <a href="<?= base_url("noticia/visualizarNoticiaQuaternaria/?id=$noticiaQuaternaria->id") ?>"><?= $noticiaQuaternaria->titulo ?></a>
+                            <a href="<?= base_url("noticia/visualizarNoticiaQuaternaria/?url=$noticiaQuaternaria->url") ?>"><?= $noticiaQuaternaria->titulo ?></a>
                         </div>
                     </div>
                 </li>
@@ -63,20 +65,20 @@
             <ul class="media-list">
                 <li class="media">
                     <div class="media-left">
-                        <a href="<?= base_url("noticia/visualizarNoticiaQuinaria/?id=$noticiaQuinaria->id") ?>">
+                        <a href="<?= base_url("noticia/visualizarNoticiaQuinaria/?url=$noticiaQuinaria->url") ?>">
                             <img class=" img-circle imgD img-responsive hidden-xs" src="<?= base_url("/uploads/$noticiaQuinaria->imagem") ?>"
                                  alt="">
                         </a>
                     </div>
                     <div class="media-body">
                         <div class="well well-lg">
-                            <a href="<?= base_url("noticia/visualizarNoticiaQuinaria/?id=$noticiaQuinaria->id") ?>"><?= $noticiaQuinaria->titulo ?></a>
+                            <a href="<?= base_url("noticia/visualizarNoticiaQuinaria/?url=$noticiaQuinaria->url") ?>"><?= $noticiaQuinaria->titulo ?></a>
                         </div>
                     </div>
                 </li>
             </ul>
             <div class="maisNoticias">
-                <a href="<?= base_url("index/noticia") ?>">Mais noticias<a/>
+                <a href="<?= base_url("home/noticia") ?>">Mais noticias<a/>
             </div>
         </div>
     </div>
